@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prediksi Suhu Harian</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f3f4f6;
+            margin: 40px;
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .hasil {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🔍 Prediksi Suhu Berdasarkan Hari</h2>
+
+    <form method="post">
+        <label for="hari">Masukkan Hari ke-:</label>
+        <input type="number" id="hari" name="hari" min="1" required>
+        <button type="submit">Prediksi</button>
+    </form>
+
+    {% if prediksi is not none %}
+    <div class="hasil">
+        <p>📅 Pada hari ke-<strong>{{ hari }}</strong>, suhu diprediksi: <strong>{{ prediksi | round(2) }} °C</strong>
+        </p>
+    </div>
+    {% endif %}
+
+    <img src="{{ url_for('static', filename='prediksi.png') }}?{{ hari }}" alt="Grafik Prediksi">
+
+    <div class="hasil">
+        <p><strong>MAE:</strong> {{ mae | round(2) }} | <strong>MSE:</strong> {{ mse | round(2) }} |
+            <strong>R²:</strong> {{ r2 | round(2) }}</p>
+    </div>
+</body>
+
+</html>
